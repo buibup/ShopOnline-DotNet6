@@ -51,7 +51,7 @@
                         ProductDescription = product.Description,
                         ProductImageURL = product.ImageURL,
                         Price = product.Price,
-                        CartId = cartItem.CardId,
+                        CartId = cartItem.CartId,
                         Qty = cartItem.Qty,
                         TotoalPrice = product.Price * cartItem.Qty
                     }).ToList();
@@ -68,7 +68,7 @@
                 ProductDescription = product.Description,
                 ProductImageURL = product.ImageURL,
                 Price = product.Price,
-                CartId = cartItem.CardId,
+                CartId = cartItem.CartId,
                 Qty = cartItem.Qty,
                 TotoalPrice = product.Price * cartItem.Qty
             };

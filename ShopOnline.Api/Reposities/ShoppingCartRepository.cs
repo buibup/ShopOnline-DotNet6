@@ -11,7 +11,7 @@
 
         private async Task<bool> CartItemExists(int cartId, int productId)
         {
-            return await _context.CartItems.AnyAsync(c => c.CardId == cartId && c.ProductId == productId);
+            return await _context.CartItems.AnyAsync(c => c.CartId == cartId && c.ProductId == productId);
         }
         public async Task<CartItem> AddItem(CartItemToAddDto cartItemToAddDto)
         {
@@ -21,7 +21,7 @@
                                   where product.Id == cartItemToAddDto.ProductId
                                   select new CartItem
                                   {
-                                      CardId = cartItemToAddDto.CartId,
+                                      CartId = cartItemToAddDto.CartId,
                                       ProductId = product.Id,
                                       Qty = cartItemToAddDto.Qty
                                   }).SingleOrDefaultAsync();
@@ -54,14 +54,14 @@
         {
             var result = await (from cartItem in _context.CartItems
                               join cart in _context.Carts
-                              on cartItem.CardId equals cart.Id
+                              on cartItem.CartId equals cart.Id
                               where cartItem.Id == id
                               select new CartItem
                               {
                                   Id = cartItem.Id,
                                   ProductId = cartItem.ProductId,
                                   Qty = cartItem.Qty,
-                                  CardId = cartItem.Id
+                                  CartId = cartItem.Id
                               }).SingleOrDefaultAsync();
 
             return result;
@@ -71,14 +71,14 @@
         {
             return await (from cart in _context.Carts
                           join cartItem in _context.CartItems
-                          on cart.Id equals cartItem.CardId
+                          on cart.Id equals cartItem.CartId
                           where cart.UserId == userId
                           select new CartItem
                           {
                               Id = cartItem.Id,
                               ProductId= cartItem.ProductId,
                               Qty = cartItem.Qty,
-                              CardId = cartItem.CardId
+                              CartId = cartItem.CartId
                           }).ToListAsync();
         }
 
